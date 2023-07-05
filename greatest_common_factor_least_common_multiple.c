@@ -4,14 +4,14 @@
 // 런타임에러 뭔데
 #include <stdio.h>
 
-int cal(int x, int y)
+/*int cal(int x, int y)
 {
-    int n =0 ; //초기화 안해주면 런타임에러
+    int n = 0; 
     if(x > y)
     {
-        for(int j = y; j > 0 ; j--) //j=0 
+        for(int j = y; j > 0 ; j--)
         {
-            if(x%j==0&&y%j==0)
+            if(x % j == 0 && y % j == 0)
             {
                 n = j;
                 break;
@@ -19,20 +19,32 @@ int cal(int x, int y)
         }
     }
     return n;
+}*/
+
+int cal(int x, int y) //최대공약수를 구하는 함수
+{
+    while (y != 0)  //0으로 나누면 안되니까
+    {
+        int temp = y; 
+        y = x % y; //y는 나머지가 되고
+        x = temp;  //x는 y가 된다  --> 이과정은 y와 x의 최대 공약수를 가지는 과정
+    }
+    
+    return x;
 }
 
 int main(void)
 {
-    int a=0, b=0;
-    int gcf=0, lcm=0;
+    int a, b;
+    int gcf, lcm;
 
     scanf("%d %d", &a, &b);
-    if (0 < a && a < 10000 && 0 < b && b < 10000) //0 < a, b < 10000 런타임에러 따로 작성해줄것
-    {
-        gcf = cal(a, b);
-        printf("%d\n", gcf);
-        printf("%d", a*b/gcf);
-    }
+   
+    gcf = cal(a, b); //최대공약수
+    lcm = a*b/gcf;  //최소공배수
+
+    printf("%d\n", gcf);
+    printf("%d", lcm);
 
     return 0;
 }
