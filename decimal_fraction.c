@@ -15,7 +15,7 @@
 
 int main(void)
 {
-    int count = 0;
+    int count;
     int n = 0;
     int df = 0;
     scanf("%d", &n);
@@ -35,22 +35,22 @@ int main(void)
         } //숫자 입력 완료
         for(int j = 0; j < n ; j ++)
         {
+            count = 0; //처음에 실행할때 이걸 안해줘서 계속 오류가 생겼음 df의 값이 이상하게 나옴
             for(int d = 1; d <= arr[j]; d++)
             {
                 if(arr[j]%d == 0)
                 {
                     count++; //입력된 숫자의 약수를 세는 변수
                 }
-                if(count == 2)
-                {
-                    df++;
-                }
             }
-            
+            if(count == 2) //두번째 실수 바깥쪽 for문에 넣어야할걸 안으로 넣었음. / 약수의 갯수가 2개뿐이면 소수이므로 소수의 갯수를 세는 df값을 1증가
+            {
+                df++;
+            }
         }
         printf("%d", df);
+        free(arr);
     }
-
     
     return 0;
 }
